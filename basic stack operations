@@ -1,0 +1,26 @@
+//BASIC STACK IMPLEMENTATION (PUSH, POP AND DISPLAY)
+
+void push(int s[],int *top,int item){
+if(*top==STACKSIZE-1){
+printf("Stack overflow, cannot insert in the stack");}
+s[++*top]=item;
+}
+
+int pop(int s[], int *top){
+if (*top==-1){
+printf("Stack underflow, cannot pop from the stack");
+return -1;
+}
+int item_del=s[*top--];
+return item_del;
+}
+
+void display(int s[], int *top, int item){
+if (*top==-1){
+printf("Cannot display as stack is empty");
+}
+printf("The below is the stack");
+for (int i=0;i<=*top;i++){
+printf("%d",s[i]);
+}
+}
