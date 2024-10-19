@@ -1,0 +1,70 @@
+//EXPRESSION FOR INFIX TO POSTFIX
+void push (int s[], int *top, int item){
+if (*top ==STacksize-1){
+printf("Stack overflow, cannot insert");
+}
+s[++*top]=item;
+}
+
+int pop (int s[], int *top){
+if (*top==-1){
+printf("Stack underflow");
+return -1;
+}
+else{
+int item_del =s[*top--];
+return item_del;
+}
+
+int precedence(char op){
+switch (op){
+case '#': return 0;
+case '(': return 1;
+case '+':
+case '-': return 2;
+case '*':
+case '/': return 3;
+default: return 0;
+}
+}
+
+void main(){
+char infix[20], postfix[20], ch;
+int i;
+clrscr();
+printf("Entrt your infix expression");
+scanf("%d",&infix);
+push('#');
+while (infix[i]!='\0'){
+
+if (isalpha(infix[i]))
+printf("%c",infix[i]);
+
+else if(infix[i]=='(')
+push(infix[i]);
+
+else if(infix[i]==')'){
+while (stack[top]!='(')
+{
+ch =pop();
+printf("%c",ch);
+}
+pop();
+}
+else{
+while ((stack[top]!='#')&&(precedence(infix[i]<=precedence(stack[top])))
+{
+ch=pop();
+printf("%c",ch);
+}
+push(infix[i]);
+}
+i++;
+}
+for(i=top;i!=0;i--){
+if (stack[i]=='(')
+printf("\n There was an issue with the expression..");
+printf("%c",stack[i]);
+}
+getch();
+}
