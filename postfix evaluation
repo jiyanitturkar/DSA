@@ -1,0 +1,59 @@
+push (double item)
+{
+if (top==MAX-1)
+printf ("\n Stack is Full !");
+else
+stack[++top] = item;
+}
+double pop ()
+{
+if (top==-1)
+printf ("\n Stack is Empty !");
+else
+return stack[top--];
+}
+int main ()
+{
+char postfix[100];
+int i;
+double ans;
+clrscr();
+printf ("\n Enter the postfix expression : ");
+scanf ("%s",postfix);
+for (i=0; postfix[i]!='\0'; i++)
+{
+char ch=postfix[i];
+switch (ch)
+{
+double item1, item2;
+case '+':
+item1 = pop();
+item2 = pop();
+push (item2+item1);
+break;
+case '-':
+item1 = pop();
+item2 = pop();
+push (item2-item1);
+break;
+case '*':
+item1 = pop();
+item2 = pop();
+push (item2*item1);
+break;
+case '/':
+item1 = pop();
+item2 = pop();
+push (item2/item1);
+break;
+default:
+item1 = ch-'0';
+push (item1);
+break;
+}
+}
+ans = pop();
+printf ("\n The evaluation result : %f",ans);
+getch();
+return 0;
+}
