@@ -1,0 +1,27 @@
+//implementation of basic operations in queue
+void insert_rear(int q[], int *top, int item){
+if (*rear==Qsize-1){
+printf("queue overflow");
+}
+q[++*rear]=item;
+}
+
+
+int delete_front(int q[], int *front, int *rear){
+if (*front>*rear){
+printf("queue underflow, cannot delete");
+return -1;
+}
+int item_del=q[*front++];
+return item_del;
+}
+
+
+void display(int q[],int *front,int *rear, int item){
+if (*front>*rear){
+printf("Underflow");
+}
+for (i=*front;i<=*rear;i++){
+printf("%d",q[i]);
+}
+}
