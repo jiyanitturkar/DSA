@@ -1,0 +1,62 @@
+NODE delete_first(NODE first) {
+    if (first == NULL) {
+        printf("LINKED LIST IS EMPTY\n");
+        return NULL;
+    }
+
+    NODE temp = first;
+    first = first->next;
+    free(temp);
+    return first;
+}
+
+
+NODE delete_end(NODE first) {
+    if (first == NULL) {
+        printf("LINKED LIST IS EMPTY\n");
+        return NULL;
+    }
+
+    if (first->next == NULL) {
+        free(first);
+        return NULL;
+    }
+
+    NODE prev = NULL, last = first;
+    while (last->next != NULL) {
+        prev = last;
+        last = last->next;
+    }
+
+    prev->next = NULL;
+    free(last);
+    return first;
+}
+
+
+NODE delete_value(NODE first, int value) {
+    if (first == NULL) {
+        printf("LINKED LIST IS EMPTY\n");
+        return NULL;
+    }
+
+    NODE current = first, prev = NULL;
+
+    while (current != NULL && current->value != value) {
+        prev = current;
+        current = current->next;
+    }
+
+    if (current == NULL) {
+        printf("VALUE NOT FOUND\n");
+        return first;
+    }
+
+    if (prev == NULL) {
+        first = current->next;
+    } else {
+        prev->next = current->next;
+    }
+    free(current);
+    return first;
+}
