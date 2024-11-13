@@ -1,0 +1,29 @@
+//Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+//An input string is valid if:
+//Open brackets must be closed by the same type of brackets.
+//Open brackets must be closed in the correct order.
+//Every close bracket has a corresponding open bracket of the same type.
+bool isValid(char* s) {
+    int top=-1;
+    char stack[100];
+    char item;
+    for(int i=0;s[i]!='\0';i++)
+    {
+        item=s[i];
+        if((item=='(')||(item=='[')||(item=='{'))
+        {
+            stack[++top]=item;
+        }
+        else{
+            if(top==-1)
+            {return false;
+            }
+            char ele;
+            ele=stack[top--];
+            if((item==')'&&ele!='(')||(item==']'&&ele!='[')||(item=='}'&&ele!='{')){
+                return false;
+            }
+        }
+    }
+    return top==-1;
+}
