@@ -1,0 +1,87 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct NODE {
+    int value;
+    struct NODE* left;
+    struct NODE* right;
+};
+
+typedef struct NODE *NODE;
+
+NODE getnode(int item) {
+    NODE new_node = (NODE)malloc(sizeof(struct NODE));
+    new_node->value = item;
+    new_node->left = NULL;
+    new_node->right = NULL;
+    return new_node;
+}
+
+NODE insert_node(NODE node, int item) {
+    if (node == NULL) {
+        return getnode(item);
+    }
+
+    if (item < node->value) {
+        node->left = insert_node(node->left, item);
+    } else if (item > node->value) {
+        node->right = insert_node(node->right, item);
+    }
+    return node;
+}
+
+void inOrder(NODE root) {
+    if (root != NULL) {
+        inOrder(root->left);
+        printf("%d ", root->value);
+        inOrder(root->right);
+    }
+}
+
+void preOrder(NODE root) {
+    if (root != NULL) {
+        printf("%d ", root->value);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+}
+
+
+void postOrder(NODE root) {
+    if (root != NULL) {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("%d ", root->value);
+    }
+}
+
+void display(NODE root) {
+    printf("The tree in inorder is: ");
+    inOrder(root);
+    printf("\n");
+
+    printf("The tree in preorder is: ");
+    preOrder(root);
+    printf("\n");
+
+    printf("The tree in postorder is: ");
+    postOrder(root);
+    printf("\n");
+}
+
+int main() {
+    NODE root = NULL;
+    int value;
+    int num;
+
+    printf("Enter the number of nodes: ");
+    scanf("%d", &num);
+
+    for (int i = 0; i < num; i++) {
+        printf("Enter value %d: ", i + 1);
+        scanf("%d", &value);
+        root = insert_node(root, value);
+    }
+    display(root);
+    return 0;
+}
